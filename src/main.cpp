@@ -1,6 +1,11 @@
-#include <iostream>
+#include "engine.h"
+
+Engine engine;
 
 int main() {
-    std::cout << "Hello, Splat!" << std::endl;
+    engine = Engine();
+
+    engine.OnExecute();
+
     return 0;
 }

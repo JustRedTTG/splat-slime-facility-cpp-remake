@@ -1,8 +1,24 @@
 cmake_minimum_required(VERSION 3.5)
 project(Splat CXX)
 
-# Add subdirectories
-add_subdirectory(src)
+# Add source files
+file(GLOB_RECURSE SOURCES "src/*.cpp")
 
 # Add include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
+
+find_package(SDL2 REQUIRED)
+include_directories(SDL2Test ${SDL2_INCLUDE_DIRS})
+
+# Add platform-specific files
+#if (UNIX)
+#    file(GLOB_RECURSE GRAPHICS_SOURCES "src/graphics/linux/*.cpp")
+#    file(GLOB_RECURSE INPUT_SOURCES "src/input/linux/*.cpp")
+#elseif (WIN32)
+#    file(GLOB_RECURSE GRAPHICS_SOURCES "src/graphics/windows/*.cpp")
+#    file(GLOB_RECURSE INPUT_SOURCES "src/input/windows/*.cpp")
+#endif()
+
+# Create executable
+add_executable(Splat ${SOURCES} ${GRAPHICS_SOURCES} ${INPUT_SOURCES})
+target_link_libraries(Splat  ${SDL2_LIBRARIES})
