@@ -3,8 +3,8 @@
 Engine::Engine() {
     version = "1.0";
     isRunning = true;
-    pWindow = NULL;
-    pRenderer = NULL;
+    pWindow = nullptr;
+    pRenderer = nullptr;
 }
 
 bool Engine::OnInit() {
@@ -18,11 +18,11 @@ bool Engine::OnInit() {
             640, 480,
             SDL_WINDOW_SHOWN);
 
-    if (pWindow != NULL) {
+    if (pWindow != nullptr) {
         pRenderer = SDL_CreateRenderer(pWindow, -1, 0);
     } else { return false; }
 
-    return true;
+    return OnLoad();
 }
 
 int Engine::OnExecute() {
@@ -53,20 +53,20 @@ void Engine::OnLoop() {
 }
 
 void Engine::OnRender() {
-    SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
-    SDL_RenderClear(pRenderer);
-
-    SDL_Rect fillRect = {150, 120, 300, 200};
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-
-    SDL_RenderFillRect(pRenderer, &fillRect);
+//    SDL_RenderGeometry(pRenderer, texCoin)
 
     SDL_RenderPresent(pRenderer);
 }
 
 void Engine::OnExit() {
     SDL_DestroyWindow(pWindow);
-    pWindow = NULL;
+    pWindow = nullptr;
     SDL_Quit();
+}
+
+bool Engine::OnLoad() {
+    texCoin = loadTexture("assets/coin.png");
+
+    return true;
 }
 

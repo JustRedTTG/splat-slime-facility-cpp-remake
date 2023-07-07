@@ -8,7 +8,9 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 find_package(SDL2 REQUIRED)
-include_directories(SDL2Test ${SDL2_INCLUDE_DIRS})
+include_directories(Splat ${SDL2_INCLUDE_DIRS})
+find_package(SDL2_image REQUIRED)
+include_directories(Splat ${SDL2_IMAGE_INCLUDE_DIRS})
 
 # Add platform-specific files
 #if (UNIX)
@@ -20,5 +22,5 @@ include_directories(SDL2Test ${SDL2_INCLUDE_DIRS})
 #endif()
 
 # Create executable
-add_executable(Splat ${SOURCES} ${GRAPHICS_SOURCES} ${INPUT_SOURCES})
-target_link_libraries(Splat  ${SDL2_LIBRARIES})
+add_executable(Splat ${SOURCES})
+target_link_libraries(Splat  ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
